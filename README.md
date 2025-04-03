@@ -2,6 +2,10 @@
 
 *复刻自[awe1p/stun: support stun in openwrt](https://github.com/awe1p/stun)*
 
+源仓库GitCode:[Xuan_er123/stun](https://gitcode.com/Xuan_er123/stun)
+
+镜像仓库GitHub:[Xuaner183/stun](https://github.com/Xuaner183/stun)
+
 编译
 ----
 
