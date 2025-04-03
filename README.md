@@ -1,32 +1,40 @@
-## stun extension for openwrt, which inclides stund and stun-client
+## OpenWrt的STUN扩展（包含 `stund`和 `stun-client`）
 
-Compile
----
-```
-# cd to OpenWrt source path
-# Clone this repo
+*复刻自[awe1p/stun: support stun in openwrt](https://github.com/awe1p/stun)*
+
+编译
+----
+
+```bash
+# 进入OpenWrt源代码目录
+# 克隆本仓库
 git clone https://github.com/awe1p/stun.git package/network/stun
-# Select Network -> stun-client and Network -> stund
+# 配置：选择 Network → stun-client 和 Network → stund
 make menuconfig
-# Compile
+# 编译
 make V=s
 ```
 
-Usage
----
+使用
+----
+
 ```
-# you should have at least two routers as server and client
-# run in stun server with two interface connected to the Internet
+# 需要至少两台路由器分别作为服务端和客户端
+# 在具有两个互联网连接接口的STUN服务端运行
 stund -v
-# run in stun client to get your NAT type in response
-stun-client {server IP} -v
+# 在STUN客户端运行以检测NAT类型
+stun-client {服务器IP} -v
+#例如：
+stun-client stun.miwifi.com -v
 ```
-Result
----
+
+结果解读
+--------
+
 ```
-when you get 
-Independent Mapping, Independent Filter = Fullcone NAT
-Independent Mapping, Address Dependent Filter = Restricted Cone NAT
-Independent Mapping, Port Dependent Filter = Port-Restricted Cone NAT
-Dependent Mapping = Symmetric NAT
+你将得到
+Independent Mapping, Independent Filter = 全锥型NAT（NAT1）
+Independent Mapping, Address Dependent Filter = 受限锥型NAT（NAT2）
+Independent Mapping, Port Dependent Filter = 端口受限锥型NAT（NAT3）
+Dependent Mapping = 对称型NAT（NAT4）
 ```
